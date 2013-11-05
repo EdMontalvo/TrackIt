@@ -1,4 +1,4 @@
 TrackIt
 ==============
 
-A C# Daily Weight Tracker.
+A C# Daily Weight Tracker
