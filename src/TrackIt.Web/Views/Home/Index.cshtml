@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Daily Weight";
+    ViewBag.InitModule = "homeIndex";
+}
+@section Scripts {
+    <script src="~/js/home-index.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/angular-strap.min.js"></script>
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            
+        });
+
+        function GetChart(timeFrame) {
+            var src = "/chart/weight/" + timeFrame;
+            $("#weightChart").attr("src", src);
+        }
+    </script>
+}
+<div data-ng-view=""></div>

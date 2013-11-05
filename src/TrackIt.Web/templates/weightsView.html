@@ -1,0 +1,111 @@
+﻿<div>
+    <div class="progress progress-striped active" data-ng-show="isBusy">
+        <div class="bar" style="width: 100%"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h3>Daily Weight</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form name="newWeightForm" novalidate data-ng-submit="save()">
+                        <div class="form-group">
+                            <label for="weightDate">Date</label>
+                            <div class="input-group">
+                                <input name="weightDate" type="text" class="form-control datepicker" data-ng-model="newWeight.weightDate" data-date-format="mm/dd/yyyy" required data-bs-datepicker="" />
+                                <span class="input-group-btn">
+                                    <button class="btn" type="button" data-toggle="datepicker">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <span class="label label-danger" data-ng-show="newWeightForm.weightDate.$error.required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Weight</label>
+                            <div class="">
+                                <div class="input-group">
+                                    <input name="weight" class="form-control" type="number" data-ng-model="newWeight.weight" required data-min="0" data-max="1000" />
+                                    <span class="input-group-addon">lbs</span>
+                                </div>
+                                <span class="label label-danger" data-ng-show="newWeightForm.weight.$error.required">*</span>
+                                <span class="label label-danger" data-ng-show="newWeightForm.weight.$error.min">Enter a positive number</span>
+                                <span class="label label-danger" data-ng-show="newWeightForm.weight.$error.max">Max value is 1000lbs</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Body Fat</label>
+                            <div class="">
+                                <div class="input-group">
+                                    <input name="bodyFat" class="form-control" type="number" data-ng-model="newWeight.bodyFat" required data-min="3" data-max="80" />
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                                <span class="label label-danger" data-ng-show="newWeightForm.bodyFat.$error.required">*</span>
+                                <span class="label label-danger" data-ng-show="newWeightForm.bodyFat.$error.min">Enter a number greater than 3%</span>
+                                <span class="label label-danger" data-ng-show="newWeightForm.bodyFat.$error.max">Max value is 80%</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" data-ng-disabled="newWeightForm.$invalid">Save</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h3>Daily Weights</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Weight</th>
+                                <th>Body Fat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="i in data.weights">
+                                <td>{{i.weightDate | date: "fullDate" }}
+                                </td>
+                                <td>{{i.weight | number:2}}
+                                </td>
+                                <td>{{i.bodyFat | number:2}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h3>Weight Chart</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <img src="/chart/weight/3" alt="Chart" width="600" height="300" id="weightChart" class="img-responsive" />
+                </div>
+                <div class="panel-footer">
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="#" data-toggle="tab" onclick="GetChart(0);">All</a></li>
+                        <li><a href="#" data-toggle="tab" onclick="GetChart(12);">1 Year</a></li>
+                        <li><a href="#" data-toggle="tab" onclick="GetChart(6);">6 Months</a></li>
+                        <li class="active"><a href="#" data-toggle="tab" onclick="GetChart(3);">3 Months</a></li>
+                        <li><a href="#" data-toggle="tab" onclick="GetChart(1);">1 Month</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
